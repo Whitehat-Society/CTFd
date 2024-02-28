@@ -61,9 +61,8 @@ def load(app):
                         "challenge_slug": quote(challenge.name),
                         "value": challenge.value,
                         "solves": num_solves,
-                        "fsolves": ordinal(num_solves),
+                        "fsolves": ordinal(num_solves) + f":{ordinal(num_solves)}_place:",
                         "category": sanitize(challenge.category),
-                        "blood_emoji": ":drop_of_blood:"
                     }
 
                     message = app.config['DISCORD_WEBHOOK_MESSAGE'].format(**format_args)
