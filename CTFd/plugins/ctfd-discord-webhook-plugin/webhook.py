@@ -12,6 +12,14 @@ import re
 from urllib.parse import quote
 
 ordinal = lambda n: "%d%s" % (n,"tsnrhtdd"[(n//10%10!=1)*(n%10<4)*n%10::4])
+def emoji(n):
+    match n:
+        case 1:
+            return "first"
+        case 2:
+            return "second"
+        case 3:
+            return "third"
 sanreg = re.compile(r'(~|!|@|#|\$|%|\^|&|\*|\(|\)|\_|\+|\`|-|=|\[|\]|;|\'|,|\.|\/|\{|\}|\||:|"|<|>|\?)')
 sanitize = lambda m: sanreg.sub(r'\1',m)
 
@@ -61,7 +69,7 @@ def load(app):
                         "challenge_slug": quote(challenge.name),
                         "value": challenge.value,
                         "solves": num_solves,
-                        "fsolves": ordinal(num_solves) + f":{ordinal(num_solves)}_place:",
+                        "fsolves": ordinal(num_solves) + f":{emoji(num_solves)}_place:",
                         "category": sanitize(challenge.category),
                     }
 
